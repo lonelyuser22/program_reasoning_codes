@@ -1,0 +1,463 @@
+class Multi extends Thread
+{  
+    public void run()
+    {  
+    System.out.println("thread is running...");  
+    }  
+    public static void main(String args[])
+    {  
+    Multi t1=new Multi();  
+    t1.start();  
+    }  
+} 
+
+---
+
+class Multi3 implements Runnable{ 
+    public void run(){  
+    System.out.println("thread is running...");  
+    }  
+      
+    public static void main(String args[]){  
+    Multi3 m1=new Multi3();  
+    Thread t1 =new Thread(m1);  
+    t1.start();  
+     }  
+    }  
+    
+---
+
+class TestSleepMethod1 extends Thread{  
+     public void run(){  
+      for(int i=1;i<5;i++){  
+        try{
+            Thread.sleep(500);
+        }
+        catch(InterruptedException e){
+            System.out.println(e);
+        }  
+        System.out.println(i);  
+      }  
+     }  
+     public static void main(String args[]){  
+      TestSleepMethod1 t1=new TestSleepMethod1();  
+      TestSleepMethod1 t2=new TestSleepMethod1();  
+       
+      t1.start();  
+      t2.start();  
+     }  
+    }  
+    
+---
+
+class TestCallRun1 extends Thread{  
+     public void run(){  
+       System.out.println("running...");  
+     }  
+     public static void main(String args[]){  
+      TestCallRun1 t1=new TestCallRun1();  
+      t1.run();//fine, but does not start a separate call stack  
+     }  
+    }  
+    
+---
+
+class TestJoinMethod1 extends Thread 
+{
+    public void run()
+    {  
+      for(int i=1;i<=5;i++){  
+       try{  
+        Thread.sleep(500);  
+        }
+        catch(Exception e){
+        System.out.println(e);
+        }  
+        System.out.println(i);  
+      }  
+     }
+
+    public static void main(String args[]){  
+     TestJoinMethod1 t1=new TestJoinMethod1();  
+     TestJoinMethod1 t2=new TestJoinMethod1();  
+     TestJoinMethod1 t3=new TestJoinMethod1();  
+     t1.start();  
+     try{  
+      t1.join();  
+     }
+    catch(Exception e){
+      System.out.println(e);
+    }  
+  
+     t2.start();  
+     t3.start();  
+     }  
+    }
+
+---
+
+getName(): It is used for Obtaining a thread’s name
+getPriority(): Obtain a thread’s priority
+isAlive(): Determine if a thread is still running
+join(): Wait for a thread to terminate
+run(): Entry point for the thread
+sleep(): suspend a thread for a period of time
+start(): start a thread by calling its run() method
+currentThread(): method returns a reference to the currently executing thread object
+---
+
+//Thread priority
+
+Thread t1 = new Thread();
+t1.setPriority(Thread.MAX_PRIORITY); // Set the priority to the maximum value
+
+//use MIN_PRIORITY, NORM_PRIORITY or MAX_PRIORITY.
+
+---
+
+ class MultithreadingDemo extends Thread 
+{ 
+    public void run() 
+    { 
+        try
+        { 
+            // Displaying the thread that is running 
+            System.out.println ("Thread " +  Thread.currentThread().getId() +  " is running"); 
+          } 
+        catch (Exception e) 
+        { 
+            // Throwing an exception 
+            System.out.println ("Exception is caught"); 
+        }  
+      } 
+      
+    } 
+
+  
+// Main Class 
+public class Multithread 
+{ 
+    public static void main(String[] args) 
+    { 
+          for (int i=0; i<8; i++) 
+        { 
+            MultithreadingDemo object = new MultithreadingDemo(); 
+            object.start();         
+        } 
+    } 
+} 
+
+---
+
+// Java code for thread creation by implementing  the Runnable Interface 
+class MultithreadingDemo implements Runnable 
+{ 
+    public void run() 
+    { 
+         
+            System.out.println ("Thread " + 
+                                Thread.currentThread().getId() +  " is running"); 
+  
+        }
+
+    public static void main(String[] args) 
+    { 
+            MultithreadingDemo m1 = new MultithreadingDemo(); 
+            Thread t1= new Thread (m1);       
+            // If you are not extending thread class your class object would not be a thread object . So you need to exp	licitly create a thread class object. We are passing the object of the class that implements runnable, so that class run() method will execute
+            t1.start();         
+        } 
+} 
+
+---
+
+class TestJoinMethod4 extends Thread{  
+    public void run(){  
+     System.out.println(Thread.currentThread().getName());  
+    }   
+  
+    public static void main(String args[]){  
+     TestJoinMethod4 t1=new TestJoinMethod4();  
+     TestJoinMethod4 t2=new TestJoinMethod4();  
+      t1.start();  
+        t2.start();  
+    }  
+}  
+   
+---
+
+class TestSleepMethod2 extends Thread{  
+    public void run(){  
+     for(int i=1;i<5;i++){  
+       try{
+   Thread.sleep(500);
+   }
+   catch(InterruptedException e){
+   System.out.println(e);
+   }  
+       System.out.println(i);  
+     }   
+}  
+    public static void main(String args[]){  
+     TestSleepMethod1 t1=new TestSleepMethod1();  
+     TestSleepMethod1 t2=new TestSleepMethod1();  
+     t1.start();  
+     t2.start();  
+    } 
+}  
+   
+---
+
+//getName(), and getId() method:
+// public String getName()
+// public void setName(String name)
+// public long getId()
+
+class TestJoinMethod3 extends Thread{  
+  public void run(){  
+   System.out.println("running...");  
+  }  
+ public static void main(String args[]){  
+  TestJoinMethod3 t1=new TestJoinMethod3();  
+  TestJoinMethod3 t2=new TestJoinMethod3();  
+  System.out.println("Name of t1:"+t1.getName());  
+  System.out.println("Name of t2:"+t2.getName());  
+  System.out.println("id of t1:"+t1.getId());  
+  
+  t1.start();  
+  t2.start();  
+  
+  t1.setName("Sonoo Jaiswal");  
+  System.out.println("After changing name of t1:"+t1.getName());  
+ }  
+}  
+
+---
+
+class TestMultiPriority1 extends Thread{  
+    public void run(){  
+      System.out.println("running thread name is:"+Thread.currentThread().getName());  
+      System.out.println("running thread priority is:"+Thread.currentThread().getPriority());  
+     
+     }  
+    public static void main(String args[]){  
+     TestMultiPriority1 m1=new TestMultiPriority1();  
+     TestMultiPriority1 m2=new TestMultiPriority1();  
+     m1.setPriority(Thread.MIN_PRIORITY);  
+     m2.setPriority(Thread.MAX_PRIORITY);  
+     m1.start();  
+     m2.start();  
+      
+    }  
+   }     
+   
+---
+
+
+class ThreadPriorityDemo extends Thread {
+  
+    public void run()
+    {    
+        try{
+            System.out.println("Runing..." + Thread.currentThread().getName());
+        }
+        catch(Exception e){
+            System.out.println(e);
+        }
+    }
+       public static void main(String[] args)
+    {
+        
+        ThreadPriorityDemo t1 = new ThreadPriorityDemo();
+        ThreadPriorityDemo t2 = new ThreadPriorityDemo();
+        ThreadPriorityDemo t3 = new ThreadPriorityDemo();
+        t1.setPriority(2);
+        t2.setPriority(5);
+        t3.setPriority(8);       
+        
+        t1.start();
+        t2.start();
+        t3.start();
+    }  
+}
+
+---
+
+class HealthInsuranceProgram {
+    private double balance;
+
+    public HealthInsuranceProgram(double initialBalance) {
+        this.balance = initialBalance;
+    }
+
+    public synchronized void claimInsurance(double amount) {
+        if (amount > balance) {
+            System.out.println("Insufficient balance. Cannot claim insurance.");
+            return;
+        }
+        balance -= amount;
+        System.out.println("Insurance claimed successfully: $" + amount);
+    }
+
+    public synchronized double getBalance() {
+        return balance;
+    }
+
+    public synchronized void deposit(double amount) {
+        balance += amount;
+        System.out.println("Deposited: $" + amount);
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        HealthInsuranceProgram insuranceProgram = new HealthInsuranceProgram(1000);
+
+        Thread claimThread = new Thread(() -> {
+            insuranceProgram.claimInsurance(500); // Claim insurance of $500
+        });
+
+        Thread depositThread = new Thread(() -> {
+            insuranceProgram.deposit(300); // Deposit $300
+        });
+
+        Thread claimThread2 = new Thread(() -> {
+            insuranceProgram.claimInsurance(800); // Try to claim insurance of $800
+        });
+
+        Thread depositThread2 = new Thread(() -> {
+            insuranceProgram.deposit(200); // Deposit $200
+        });
+
+        claimThread.start();
+        depositThread.start();
+        claimThread2.start();
+        depositThread2.start();
+
+        // Wait for all threads to finish
+        try {
+            claimThread.join();
+            depositThread.join();
+            claimThread2.join();
+            depositThread2.join();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        System.out.println("Current Balance: $" + insuranceProgram.getBalance());
+    }
+}
+
+---
+
+class Counter {
+    private int count;
+
+    public synchronized void incr() {
+        count++;
+    }
+
+    public int getCount() {
+        return count;
+    }
+}
+
+public class SyncDemo {
+    public static void main(String[] args) throws InterruptedException {
+        Counter c = new Counter();
+
+        Thread t1 = new Thread(new Runnable() {
+            public void run() {
+                for (int i = 1; i <= 1000; i++) {
+                    c.incr();
+                }
+            }
+        });
+
+        Thread t2 = new Thread(new Runnable() {
+            public void run() {
+                for (int i = 1; i <= 1000; i++) {
+                    c.incr();
+                }
+            }
+        });
+
+        t1.start();
+        t2.start();
+
+        t1.join();
+        t2.join();
+
+        System.out.println("Count: " + c.getCount());
+    }
+}
+
+---
+
+public class P {
+    private int count = 0;
+
+    public synchronized void func() {
+        System.out.println("Running thread:" + Thread.currentThread().getId());
+        for (int i = 0; i < 1000; i++) {
+            count++;
+        }
+    }
+
+    public synchronized int getCount() {
+        return count;
+    }
+}
+
+public class Q {
+    private int count = 0;
+
+    public synchronized void func() {
+        System.out.println("Running thread:" + Thread.currentThread().getId());
+        for (int i = 0; i < 1000; i++) {
+            count++;
+        }
+    }
+
+    public synchronized int getCount() {
+        return count;
+    }
+}
+
+public class A {
+    private P p = new P();
+    private Q q = new Q();
+
+    public void fun() {
+        synchronized (p) {
+            p.func();
+            int x = p.getCount();
+            System.out.println(x);
+        }
+        synchronized (q) {
+            q.func();
+            int y = q.getCount();
+            System.out.println(y);
+        }
+    }
+
+    public static void main(String[] args) {
+        A a = new A();
+        Thread t1 = new Thread(() -> {
+            a.fun();
+        });
+        Thread t2 = new Thread(() -> {
+            a.fun();
+        });
+
+        t1.start();
+        t2.start();
+    }
+}
+
+---
+
+
+
+
+
